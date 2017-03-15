@@ -1,22 +1,8 @@
 // filtering and transforming example
+#include <person.h>
 #include <algorithm>
 #include <iostream>
-#include <string>
 #include <vector>
-
-class Person {
-public:
-    Person(const std::string& name, bool isFemale)
-        : _name{name}
-        , female{isFemale}
-    {}
-    bool isFemale() const { return female; }
-    bool isNotFemale() const { return !female; }
-    std::string name() const { return _name; }
-private:
-    std::string _name;
-    bool female;
-};
 
 void removeNonFemales(std::vector<Person>& people)
 {

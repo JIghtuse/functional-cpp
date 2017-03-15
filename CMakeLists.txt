@@ -17,3 +17,5 @@ add_executable(string_trimming
     src/basics/string_trimming.cpp)
 add_executable(filtering_and_transforming
     src/basics/filtering_and_transforming.cpp)
+add_executable(implementing_hof
+    src/basics/implementing_hof.cpp)
