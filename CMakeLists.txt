@@ -19,3 +19,6 @@ add_executable(filtering_and_transforming
     src/basics/filtering_and_transforming.cpp)
 add_executable(implementing_hof
     src/basics/implementing_hof.cpp)
+
+add_executable(function_definition
+    src/functional_objects/function_definition.cpp)
