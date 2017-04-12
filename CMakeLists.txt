@@ -22,3 +22,5 @@ add_executable(implementing_hof
 
 add_executable(function_definition
     src/functional_objects/function_definition.cpp)
+add_executable(functions
+    src/functional_objects/functions.cpp)
