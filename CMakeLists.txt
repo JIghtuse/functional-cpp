@@ -26,3 +26,8 @@ add_executable(functions
     src/functional_objects/functions.cpp)
 add_executable(lambdas
     src/functional_objects/lambdas.cpp)
+add_executable(lambda_internals
+    src/functional_objects/company.cpp
+    src/functional_objects/lambda_internals.cpp)
+add_executable(mutable_lambda
+    src/functional_objects/mutable_lambda.cpp)
