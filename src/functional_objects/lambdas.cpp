@@ -1,3 +1,4 @@
+#include <car.h>
 #include <person.h>
 #include <algorithm>
 #include <iostream>
@@ -118,4 +119,26 @@ int main()
                       << '\n';
         }
     );
+
+
+
+    // Generic lambdas
+
+    auto cars = std::vector<Car>{
+        {"Toyota", 32},
+        {"Nissan", 10}
+    };
+
+    // accepts any object with compatible age() member function
+    auto predicate = [limit = 42u](auto&& object) {
+        return object.age() > limit;
+    };
+
+    auto peopleCounter = std::count_if(people.cbegin(), people.cend(), predicate);
+
+    std::cout << "people counter: " << peopleCounter << '\n';
+
+    auto carCounter = std::count_if(cars.cbegin(), cars.cend(), predicate);
+
+    std::cout << "car counter: " << carCounter << '\n';
 }
