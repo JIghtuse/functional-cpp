@@ -33,3 +33,5 @@ add_executable(mutable_lambda
     src/functional_objects/mutable_lambda.cpp)
 add_executable(filter_less_boilerplate
     src/functional_objects/filter_less_boilerplate.cpp)
+add_executable(stl_operator_function_objects
+    src/functional_objects/stl_operator_function_objects.cpp)
