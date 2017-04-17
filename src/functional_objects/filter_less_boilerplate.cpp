@@ -1,3 +1,4 @@
+#include <common.h>
 #include <error_test.h>
 #include <algorithm>
 #include <iostream>
@@ -48,22 +49,14 @@ int main()
         {"", true},
     };
 
-    auto print_responses = [](const auto& header, const auto& responses) {
-        std::cout << header << '\n';
-        for (const auto& response: responses) {
-            std::cout << response << '\n';
-        }
-    };
-
     auto ok_responses = filter(responses, not_error);
     // or             = filter(responses, !error);
     // or             = filter(responses, error == false);
-    print_responses("Successful responses:", ok_responses);
-    std::cout << '\n';
+    print(ok_responses, "Successful responses:\n", "", "\n");
 
     auto failed_responses = filter(responses, error);
     // or                 = filter(responses, error == true);
     // or                 = filter(responses, not_error == false);
 
-    print_responses("Failed responses:", failed_responses);
+    print(failed_responses, "Failed responses:\n", "", "\n");
 }
