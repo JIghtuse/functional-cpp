@@ -5,6 +5,11 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++1z -Wall -Wextra -Weffc++")
 
 include_directories(include/)
 
+find_package(Boost 1.60)
+if (Boost_FOUND)
+  include_directories(${Boost_INCLUDE_DIRS})
+endif()
+
 add_executable(wc_imperative
     src/basics/wc_imperative.cpp)
 add_executable(wc_functional
@@ -35,3 +40,5 @@ add_executable(filter_less_boilerplate
     src/functional_objects/filter_less_boilerplate.cpp)
 add_executable(stl_operator_function_objects
     src/functional_objects/stl_operator_function_objects.cpp)
+add_executable(boost_phoenix_operator_function_objects
+    src/functional_objects/boost_phoenix_operator_function_objects.cpp)
