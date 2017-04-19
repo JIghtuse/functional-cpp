@@ -44,3 +44,6 @@ add_executable(boost_phoenix_operator_function_objects
     src/functional_objects/boost_phoenix_operator_function_objects.cpp)
 add_executable(wrapping_with_std_function
     src/functional_objects/wrapping_with_std_function.cpp)
+
+add_executable(partial_function_application
+    src/new_functions/partial_function_application.cpp)
