@@ -1,4 +1,5 @@
 #include <common.h>
+#include <partial_application.h>
 #include <algorithm>
 #include <iomanip>
 #include <iostream>
@@ -34,4 +35,11 @@ int main()
     auto xs = std::vector<int>{1, 3, 923, 12, 8, 10, 2, 42};
     std::partition(xs.begin(), xs.end(), greaterThan{6});
     print(xs, "Partitioned around 6: ");
+
+    auto greaterThan42_generic = bind2nd(std::greater<int>(), 42);
+    std::cout << 1 << " > 42 ? " << greaterThan42_generic(1) << '\n';
+    std::cout << 50 << " > 42 ? " << greaterThan42_generic(50) << '\n';
+
+    std::partition(xs.begin(), xs.end(), bind2nd(std::greater<int>(), 11));
+    print(xs, "Partitioned around 11: ");
 }
