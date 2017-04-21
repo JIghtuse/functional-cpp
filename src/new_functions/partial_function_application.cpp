@@ -1,5 +1,6 @@
 #include <common.h>
 #include <partial_application.h>
+#include <cmath>
 #include <algorithm>
 #include <iomanip>
 #include <iostream>
@@ -42,4 +43,13 @@ int main()
 
     std::partition(xs.begin(), xs.end(), bind2nd(std::greater<int>(), 11));
     print(xs, "Partitioned around 11: ");
+
+    auto degrees = std::vector<double>{0, 30, 45, 60};
+    auto radians = std::vector<double>(degrees.size());
+
+    std::transform(degrees.cbegin(), degrees.cend(),
+                   radians.begin(),
+                   bind2nd(std::multiplies<double>(), M_PI / 180));
+    print(degrees, "Degrees: ");
+    print(radians, "Radians: ");
 }
