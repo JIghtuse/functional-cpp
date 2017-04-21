@@ -47,3 +47,5 @@ add_executable(wrapping_with_std_function
 
 add_executable(partial_function_application
     src/new_functions/partial_function_application.cpp)
+add_executable(bind
+    src/new_functions/bind.cpp)
