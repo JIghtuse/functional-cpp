@@ -1,11 +1,24 @@
 // std::bind usage examples
 
 #include <common.h>
+#include <person.h>
 #include <algorithm>
 #include <functional>
 #include <iomanip>
 #include <iostream>
 #include <vector>
+
+void printPerson(const Person& person,
+                 std::ostream& out,
+                 Person::OutputFormat format)
+{
+    if (format == Person::NameOnly) {
+        out << person.name() << '\n';
+    } else if (format == Person::FullName) {
+        out << person.name() << ' '
+            << person.surname() << '\n';
+    }
+}
 
 int main()
 {
@@ -35,4 +48,26 @@ int main()
     auto less_than = std::bind(std::greater<int>(), _2, _1);
     std::sort(v.begin(), v.end(), less_than);
     print(v, "After sorting: ");
+
+    auto people = std::vector<Person>{
+        {"Peter", false, 56},
+        {"Martha", true, 24},
+        {"Jane", true, 52},
+        {"David", false, 84},
+        {"Tom", false, 32},
+        {"Rose", true, 31}
+    };
+    std::cout << "Some people:\n";
+    std::for_each(people.cbegin(), people.cend(),
+                  std::bind(printPerson,
+                            _1,
+                            std::ref(std::cout),
+                            Person::FullName));
+
+    std::cout << "Some people again:\n";
+    std::for_each(people.cbegin(), people.cend(),
+                  std::bind(&Person::print,
+                            _1,
+                            std::ref(std::cout),
+                            Person::NameOnly));
 }
