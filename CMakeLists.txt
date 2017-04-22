@@ -49,3 +49,5 @@ add_executable(partial_function_application
     src/new_functions/partial_function_application.cpp)
 add_executable(bind
     src/new_functions/bind.cpp)
+add_executable(lambdas_as_bind_alternative
+    src/new_functions/lambdas.cpp)
