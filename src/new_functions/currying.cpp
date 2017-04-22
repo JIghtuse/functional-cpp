@@ -1,5 +1,6 @@
 // currying examples
 
+#include <person.h>
 #include <iomanip>
 #include <iostream>
 
@@ -16,6 +17,29 @@ auto greater_curried(double first)
         return first > second;
     };
 }
+
+void printPerson(const Person& person,
+                 std::ostream& out,
+                 Person::OutputFormat format)
+{
+    if (format == Person::NameOnly) {
+        out << person.name() << '\n';
+    } else if (format == Person::FullName) {
+        out << person.name() << ' '
+            << person.surname() << '\n';
+    }
+}
+
+// converting printPerson to its curried version
+auto printPersonCd(const Person& person)
+{
+    return [&] (std::ostream& out) {
+        return [&] (Person::OutputFormat fmt) {
+            printPerson(person, out, fmt);
+        };
+    };
+}
+
 
 int main()
 {
