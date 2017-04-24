@@ -53,3 +53,5 @@ add_executable(lambdas_as_bind_alternative
     src/new_functions/lambdas.cpp)
 add_executable(currying
     src/new_functions/currying.cpp)
+add_executable(function_composition
+    src/new_functions/function_composition.cpp)
