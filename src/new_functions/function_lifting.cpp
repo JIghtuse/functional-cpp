@@ -77,6 +77,24 @@ auto mapLift(Function f)
     });
 }
 
+template<
+    typename C,
+    typename P1 = typename std::remove_cv_t<typename C::value_type::first_type>,
+    typename P2 = typename C::value_type::second_type
+    >
+std::vector<std::pair<P2, P1>> reversePairs(const C& items)
+{
+    std::vector<std::pair<P2, P1>> result(items.size());
+    std::transform(std::begin(items), std::end(items),
+                   std::begin(result),
+                   [] (const std::pair<const P1, P2>& p)
+                   {
+                       return std::make_pair(p.second, p.first);
+                   });
+    return result;
+}
+
+
 int main()
 {
     const auto vsOriginal = std::vector<std::string>{
@@ -111,6 +129,12 @@ int main()
     mapLift(toUpper)(ms);
     std::cout << "Some animals after call toUpper:\n";
     for (const auto& pair: ms) {
+        std::cout << pair.first << ": " << pair.second << '\n';
+    }
+
+    auto v = reversePairs(ms);
+    std::cout << "Some animals after reversing pairs: \n";
+    for (const auto& pair: v) {
         std::cout << pair.first << ": " << pair.second << '\n';
     }
 }
