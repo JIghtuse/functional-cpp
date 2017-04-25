@@ -55,3 +55,5 @@ add_executable(currying
     src/new_functions/currying.cpp)
 add_executable(function_composition
     src/new_functions/function_composition.cpp)
+add_executable(function_lifting
+    src/new_functions/function_lifting.cpp)

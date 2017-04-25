@@ -1,0 +1,116 @@
+// Function lifting examples
+#include <common.h>
+#include <cctype>
+#include <algorithm>
+#include <iostream>
+#include <map>
+#include <string>
+#include <vector>
+
+// if we have a function that operates on a string:
+void toUpper(std::string& s)
+{
+    std::transform(s.cbegin(), s.cend(),
+                   s.begin(),
+                   ::toupper);
+}
+
+// we could easily create functions to operate on a:
+// - pointer to string,
+// - vector of strings,
+// - map with value strings
+
+void pointerToUpper(std::string* s)
+{
+    if (s != nullptr) {
+        toUpper(*s);
+    }
+}
+
+void vectorToUpper(std::vector<std::string>& vs)
+{
+    for (auto& s: vs) {
+        toUpper(s);
+    }
+}
+
+void mapToUpper(std::map<int, std::string>& ms)
+{
+    for (auto& pair: ms) {
+        toUpper(pair.second);
+    }
+}
+
+
+// Note: these functions would be implemented in the exact same way
+// if the function toUpper was to be replaced with something else
+
+// We could have created a HOF that takes any function that operates
+// on a single string, and creates a function that operates on a pointer (vector, map) to a string
+// These functions are called lifting functions
+
+template<typename Function>
+auto pointerLift(Function f)
+{
+    return [f](auto* item) {
+        if (item) {
+            return f(*item);
+        }
+    };
+}
+
+template<typename Function>
+auto collectionLift(Function f)
+{
+    return [f](auto& items) {
+        for (auto& item: items) {
+            f(item);
+        }
+    };
+}
+
+template<typename Function>
+auto mapLift(Function f)
+{
+    return collectionLift([f](auto& pair) {
+        return f(pair.second);
+    });
+}
+
+int main()
+{
+    const auto vsOriginal = std::vector<std::string>{
+        "Abc",
+        "dEF",
+        "ghi",
+        "jkL"
+    };
+
+    const auto msOriginal = std::map<int, std::string>{
+        {0, "dog"},
+        {1, "Cat"},
+        {2, "parrot"},
+        {3, "worm"}
+    };
+
+    auto vs = vsOriginal;
+    print(vs, "before call toUpper: ");
+    vectorToUpper(vs);
+    print(vs, "after call toUpper : ");
+
+    vs = vsOriginal;
+    print(vs, "before call toUpper: ");
+    collectionLift(toUpper)(vs);
+    print(vs, "after call toUpper : ");
+
+    auto ms = msOriginal;
+    std::cout << "Some animals before call toUpper:\n";
+    for (const auto& pair: ms) {
+        std::cout << pair.first << ": " << pair.second << '\n';
+    }
+    mapLift(toUpper)(ms);
+    std::cout << "Some animals after call toUpper:\n";
+    for (const auto& pair: ms) {
+        std::cout << pair.first << ": " << pair.second << '\n';
+    }
+}
