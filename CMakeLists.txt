@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.6)
+cmake_minimum_required(VERSION 2.10)
 project(functional_cpp)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++1z -Wall -Wextra -Weffc++")
@@ -53,6 +53,12 @@ add_executable(lambdas_as_bind_alternative
     src/new_functions/lambdas.cpp)
 add_executable(currying
     src/new_functions/currying.cpp)
+if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
+    if (CMAKE_CXX_COMPILER_VERSION VERSION_GREATER 6.4)
+        add_executable(currying17
+            src/new_functions/currying17.cpp)
+    endif()
+endif()
 add_executable(function_composition
     src/new_functions/function_composition.cpp)
 add_executable(function_lifting
