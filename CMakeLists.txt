@@ -66,3 +66,6 @@ add_executable(function_lifting
 
 add_executable(const
     src/purity/const.cpp)
+
+add_executable(range_filter_and_transform)
+    src/ranges/range_filter_and_transform.cpp)
