@@ -69,3 +69,5 @@ add_executable(const
 
 add_executable(range_filter_and_transform
     src/ranges/range_filter_and_transform.cpp)
+add_executable(infinite_ranges
+    src/ranges/infinite_ranges.cpp)
