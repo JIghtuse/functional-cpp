@@ -69,6 +69,8 @@ add_executable(const
 
 add_executable(fib
     src/lazy_evaluation/fib.cpp)
+add_executable(memoization
+    src/lazy_evaluation/memoization.cpp)
 
 add_executable(range_filter_and_transform
     src/ranges/range_filter_and_transform.cpp)
